@@ -8,9 +8,6 @@ This project demonstrates a comprehensive testing framework for a RESTful API th
 
 [Local Testing Execution Example](Record.gif)
 
-[Local Testing Execution Example](Record2.gif)
-
-
 ### Books
 
 - **GET** `/books`
