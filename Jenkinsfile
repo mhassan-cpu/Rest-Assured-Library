@@ -10,7 +10,8 @@ pipeline {
 
         stage('Run Test') {
             steps {
-                bat 'cd /d "D:\Training\Library" mvn clean verify -Denv="http://localhost:3000"'
+                bat 'cd /d "D:\\Training\\Library" && mvn clean verify -Denv="http://localhost:3000"'
+
             }
         }
     }
