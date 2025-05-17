@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["title", "author", "isbn", "releaseDate", "createdAt", "updatedAt", "id"],
+  "properties": {
+    "title": { "type": "string" },
+    "author": { "type": "string" },
+    "isbn": { "type": "string" },
+    "releaseDate": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "id": { "type": "number" }
+  }
+}

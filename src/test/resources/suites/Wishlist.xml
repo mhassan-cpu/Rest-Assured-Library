@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Library-API Suite">
+    <test name="WishlistTests">
+        <classes>
+            <class name="testcases.Wishlists.TC01_CreateNewWishlist"></class>
+            <class name="testcases.Wishlists.TC02_GetAllWishlists"></class>
+            <class name="testcases.Wishlists.TC03_GetWishlistByID"></class>
+            <class name="testcases.Wishlists.TC04_UpdateWishlist"></class>
+            <class name="testcases.Wishlists.TC05_DeleteWishlist"></class>
+
+        </classes>
+    </test>
+</suite>

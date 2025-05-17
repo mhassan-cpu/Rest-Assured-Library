@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MasterSuite">
+    <parameter name="env" value="http://localhost:3000"></parameter>
+    <suite-files>
+        <suite-file path="src/test/resources/suites/book.xml"/>
+        <suite-file path="src/test/resources/suites/household.xml"/>
+        <suite-file path="src/test/resources/suites/user.xml"/>
+        <suite-file path="src/test/resources/suites/Wishlist.xml"/>
+    </suite-files>
+</suite>

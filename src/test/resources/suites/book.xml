@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Library-API Suite">
+    <test name="BookTests">
+        <classes>
+            <class name="testcases.books.TC01_CreateNewBook"></class>
+            <class name="testcases.books.TC05_GetAllBooks"></class>
+            <class name="testcases.books.TC02_GetBookByID"></class>
+            <class name="testcases.books.TC03_UpdateBook"></class>
+            <class name="testcases.books.TC04_DeleteBook"></class>
+
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Library-API Suite">
+    <test name="UserTests">
+        <classes>
+            <class name="testcases.users.TC01_CreateNewUser"></class>
+            <class name="testcases.users.TC02_GetAllUsers"></class>
+            <class name="testcases.users.TC03_GetUserByID"></class>
+            <class name="testcases.users.TC04_UpdateUser"></class>
+            <class name="testcases.users.TC05_DeleteUser"></class>
+        </classes>
+    </test>
+</suite>

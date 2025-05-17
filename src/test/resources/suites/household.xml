@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Library-API Suite">
+    <test name="HouseholdTests">
+        <classes>
+            <class name="testcases.households.TC01_GetAllHouseholds"></class>
+            <class name="testcases.households.TC02_CreateNewHousehold"></class>
+            <class name="testcases.households.TC03_GetHouseholdByID"></class>
+            <class name="testcases.households.TC04_UpdateHousehold"></class>
+            <class name="testcases.households.TC05_DeleteHousehold"></class>
+
+
+        </classes>
+    </test>
+</suite>
