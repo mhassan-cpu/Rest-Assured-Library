@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.databind.ObjectMapper; // ✅ This was missing
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class CreateWishlistBody {
             wishlistBody.put("name", name);
             wishlistBody.put("books", bookIds);
 
-            // Convert map to JSON string
+
             ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(wishlistBody);
 

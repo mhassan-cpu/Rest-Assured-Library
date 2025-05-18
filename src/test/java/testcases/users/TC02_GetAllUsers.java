@@ -178,7 +178,7 @@ public class TC02_GetAllUsers extends TestBase {
             Assert.assertTrue(users.isEmpty(), "[TC08-N] Unexpected users returned");
         }
 
-        // TC09-N & TC10-N are invalid in this context because we don't expect multiple valid users in error
+
     }
 
 

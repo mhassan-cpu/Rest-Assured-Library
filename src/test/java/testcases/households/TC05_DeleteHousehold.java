@@ -118,7 +118,7 @@ public class TC05_DeleteHousehold extends TestBase {
                 "[TC03-N] Expected non-empty error response body but found empty"
         );
 
-        // [2.5] TC04 - Validate JSON parsing still works on error response
+
         try {
             new com.fasterxml.jackson.databind.ObjectMapper().readTree(body);
         } catch (Exception e) {

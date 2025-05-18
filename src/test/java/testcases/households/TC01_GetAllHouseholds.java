@@ -106,18 +106,7 @@ public class TC01_GetAllHouseholds extends TestBase{
                 "Expected 401 for unauthenticated request"
         );
 
-      /*  // TC02: Get all households with invalid credentials → 403 or 404
-        int invalidCredStatus = given()
-                .auth().preemptive().basic("wrongUser", "wrongPass")
-                .header("Content-Type", "application/json")
-                .header("g-token", "ROM831ESV")
-                .when()
-                .get("/households/")
-                .getStatusCode();
-        Assert.assertTrue(
-                invalidCredStatus == 403 || invalidCredStatus == 404,
-                "Expected 403 or 404 for invalid credentials, but got: " + invalidCredStatus
-        ); */
+
 
         // TC03: Get all households with invalid token → 403
         Assert.assertEquals(

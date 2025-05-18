@@ -142,7 +142,7 @@ public class TC04_UpdateHousehold extends TestBase {
 
     }
 
-    // Utility method to generate current ISO 8601 timestamp
+
     private String now() {
         return java.time.ZonedDateTime.now(java.time.ZoneOffset.UTC).toString();
     }

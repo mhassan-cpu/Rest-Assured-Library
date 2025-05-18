@@ -21,14 +21,14 @@ public class TestBase {
 
     public static int wishlistID;
 
-    //protected Faker faker = new Faker();
+
     SoftAssert softassert ;
 
 
     @Parameters ("env")
     @BeforeTest public void setBaseURL(String env){
 
-        //RestAssured.baseURI = "http://localhost:3000";
+
         RestAssured.baseURI = env ;
 
 

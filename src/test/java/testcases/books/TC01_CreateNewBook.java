@@ -43,39 +43,12 @@ public class TC01_CreateNewBook extends TestBase {
 
     // define base url
 
-    @Test(priority = 1, description = "Create new book with valid data" , retryAnalyzer = Retry.class)
+    @Test(priority = 1, description = "Create new book with valid data", retryAnalyzer = Retry.class)
     public void checkCreateNewBook_P() throws JsonProcessingException {
 
-
-
-       /*JSONObject CreateRequestBody = new JSONObject();
-        CreateRequestBody.put("title",generateRandomName());
-        CreateRequestBody.put("author",generateRandomName());
-        CreateRequestBody.put("isbn","test isbn");
-        CreateRequestBody.put("releaseDate","11-11-2025");
-
-        JSONArray arr = new JSONArray();
-        JSONObject address1 = new JSONObject();
-        JSONObject address2 = new JSONObject();
-        address1.put("address","address 1");
-        address2.put("address","address 2");
-        arr.add(address1);
-        arr.add(address2);
-        CreateRequestBody.put("addresses",arr);*/
-
-        //CreateBook CreateBookBody = new CreateBook();
-        //CreateBookBody.setTitle(generateRandomName()).setAuthor(generateRandomName()).setIsbn("test isbn").setReleaseDate("2010-04-15T00:00:00.000Z");
-
-        //ObjectMapper mapper = new ObjectMapper();
-
-
-        //check status code
         Response response = given()
 
-                //.param("name","ahmed")
-                //.auth().basic("admin","admin")
-                //.auth().digest("admin","admin")
-                //.header("Authorization", "berear ghfgh")
+
                 .log().all().header("Content-Type", "application/json")
                 .header("g-token", "ROM831ESV")
                 .body(getCreateBookBody(Title, Author, ISBN, ReleaseDate))
@@ -84,12 +57,12 @@ public class TC01_CreateNewBook extends TestBase {
         response.prettyPrint();
 
 
-        // check response time
+
         System.out.println(response.getTime());
         Assert.assertTrue(response.getTime() < 4000);
 
 
-        // Extract each field explicitly
+
         String title = response.jsonPath().getString("title");
         String author = response.jsonPath().getString("author");
         String isbn = response.jsonPath().getString("isbn");
@@ -98,24 +71,10 @@ public class TC01_CreateNewBook extends TestBase {
         String updatedAt = response.jsonPath().getString("updatedAt");
         Integer id = response.jsonPath().getInt("id");
 
-        // Assert each field is not null
         Assert.assertNotNull(title, "Title is missing");
         Assert.assertTrue(!title.isEmpty());
         Assert.assertTrue(!title.equals(null));
         Assert.assertEquals(response.jsonPath().get("title"), Title);
-
-        //Soft assert
-
-
-       /* SoftAssert softassert = new SoftAssert();
-        softassert.assertNotNull(title, "Title is missing");
-        softassert.assertTrue(!title.isEmpty());
-        softassert.assertTrue(!title.equals(null));
-        softassert.assertEquals(response.jsonPath().get("title"), Title);
-
-*/
-
-        /////
 
         Assert.assertNotNull(author, "Author is missing");
         Assert.assertTrue(!author.isEmpty());
@@ -156,7 +115,7 @@ public class TC01_CreateNewBook extends TestBase {
             Date release = sdf.parse(releaseStr);
             Date now = new Date();
 
-            // ✅ format AFTER parsing
+
             String createdAtTrimmed = secondFormat.format(createdDate);
             String updatedAtTrimmed = secondFormat.format(updatedDate);
 
@@ -165,15 +124,11 @@ public class TC01_CreateNewBook extends TestBase {
 
             Assert.assertFalse(release.after(now), "releaseDate should not be in the future");
 
-            // Optional: assert full precision if needed
-            // Assert.assertEquals(updatedAt, createdAt, "createdAt and updatedAt should be equal upon creation");
-
         } catch (ParseException e) {
             e.printStackTrace();
             Assert.fail("Date parsing failed: " + e.getMessage());
         }
 
-        // get BookID
         BookID = response.jsonPath().getInt("id");
 
     }
@@ -184,7 +139,7 @@ public class TC01_CreateNewBook extends TestBase {
         // Base payload template
         String basePayload = "{ \"title\": \"%s\", \"author\": \"%s\", \"isbn\": \"%s\", \"releaseDate\": \"%s\" }";
 
-        // TC01: Missing title
+
         String missingTitlePayload = String.format(basePayload, "", generateRandomName(), generateRandomIsbn(), ReleaseDate);
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
@@ -196,7 +151,7 @@ public class TC01_CreateNewBook extends TestBase {
                 "TC01: Expected 400 for missing title"
         );
 
-        // TC02: Missing author
+
         String missingAuthorPayload = String.format(basePayload, generateRandomName(), "", generateRandomIsbn(), ReleaseDate);
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
@@ -208,7 +163,7 @@ public class TC01_CreateNewBook extends TestBase {
                 "TC02: Expected 400 for missing author"
         );
 
-        // TC03: Missing ISBN
+
         String missingIsbnPayload = String.format(basePayload, generateRandomName(), generateRandomName(), "", ReleaseDate);
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
@@ -220,7 +175,7 @@ public class TC01_CreateNewBook extends TestBase {
                 "TC03: Expected 400 for missing ISBN"
         );
 
-        // TC04: Invalid release date format
+
         String invalidDatePayload = String.format(basePayload, generateRandomName(), generateRandomName(), generateRandomIsbn(), "32-13-2020");
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
@@ -232,7 +187,7 @@ public class TC01_CreateNewBook extends TestBase {
                 "TC04: Expected 400 for invalid releaseDate"
         );
 
-        // TC05: Unauthinticated request (no token)
+
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
                         .body(String.format(basePayload, generateRandomName(), generateRandomName(), generateRandomIsbn(), ReleaseDate))
@@ -241,7 +196,7 @@ public class TC01_CreateNewBook extends TestBase {
                 403, "TC05: Expected 403 for missing token"
         );
 
-        // TC06: Invalid token
+
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
                         .header("g-token", "INVALID_TOKEN")
@@ -251,7 +206,7 @@ public class TC01_CreateNewBook extends TestBase {
                 403, "TC06: Expected 403 for invalid token"
         );
 
-        // TC07: Wrong HTTP method (GET instead of POST)
+
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
                         .header("g-token", "ROM831ESV")
@@ -261,7 +216,7 @@ public class TC01_CreateNewBook extends TestBase {
                 "TC07: Expected 405 for GET on /books (instead of POST)"
         );
 
-        // TC08: Malformed JSON
+
         String malformedJson = "{ \"title\": \"testTitle\", \"author\": ";
         Assert.assertEquals(
                 given().header("Content-Type", "application/json")
@@ -272,16 +227,7 @@ public class TC01_CreateNewBook extends TestBase {
                 400, "TC08: Expected 400 for malformed JSON"
         );
 
-      /*  // TC09: Missing Content-Type header
-        Assert.assertEquals(
-                given()
-                        .header("g-token", "ROM831ESV")
-                        .body(String.format(basePayload, generateRandomName(), generateRandomName(), generateRandomIsbn(), ReleaseDate))
-                        .when().post("/books")
-                        .getStatusCode(),
-                415, // API Bug
-                "TC09: Expected 415 Unsupported Media Type (missing Content-Type)"
-        );  */
+
     }
 
 }

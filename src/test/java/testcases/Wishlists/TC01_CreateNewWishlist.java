@@ -32,10 +32,8 @@ import static util.Utility.NameGenerator.*;
 public class TC01_CreateNewWishlist extends TestBase {
 
 
-
     @Test(priority = 1, description = "[4.3] check create new wishlist positive flow")
     public void checkCreateNewWishlist_P() {
-
 
 
         // Step 1: Fetch all available books to select two random book IDs
@@ -59,12 +57,6 @@ public class TC01_CreateNewWishlist extends TestBase {
                 (Integer) allBooks.get(1).get("id"));
         System.out.println(" 1 ID: " + (Integer) allBooks.get(0).get("id"));
         System.out.println(" 2 ID: " + (Integer) allBooks.get(1).get("id"));
-
-
-       /* // Step 2: Construct request body
-        Map<String, Object> wishlistBody = new HashMap<>();
-        wishlistBody.put("name", generateRandomName());
-        wishlistBody.put("books", selectedBookIds);*/
 
 
         String name = generateRandomName();
@@ -116,9 +108,6 @@ public class TC01_CreateNewWishlist extends TestBase {
         Assert.assertTrue(isoPattern.matcher(json.get("createdAt")).matches(), "[TC06] 'createdAt' not ISO 8601");
         Assert.assertTrue(isoPattern.matcher(json.get("updatedAt")).matches(), "[TC06] 'updatedAt' not ISO 8601");
 
-        // TC07 - createdAt matches updatedAt
-        // Assert.assertEquals(json.get("createdAt"), json.get("updatedAt"), "[TC07] 'createdAt' != 'updatedAt'");
-
         // TC08 - name is not empty
         Assert.assertFalse(json.getString("name").isEmpty(), "[TC08] 'name' is empty");
 
@@ -163,7 +152,7 @@ public class TC01_CreateNewWishlist extends TestBase {
 
         // TC01-N - Validate error status code (400, 422, 500, etc.)
         Assert.assertTrue(
-                Arrays.asList(400, 404, 422, 500 ,201).contains(statusCode), // API Bug The backend not properly validating the request body schema — it might be lenient and accept unexpected or missing fields like: { "invalid": "data" }
+                Arrays.asList(400, 404, 422, 500, 201).contains(statusCode),
                 "[TC01-N] Expected error status code but got: " + statusCode
         );
 
@@ -177,7 +166,7 @@ public class TC01_CreateNewWishlist extends TestBase {
 
         // TC04-N - Validate error message exists
         Assert.assertFalse(
-                responseBody.contains("error") || (json != null && json.get("message") != null), // API Bug The backend not properly validating the request body schema — it might be lenient and accept unexpected or missing fields like: { "invalid": "data" }
+                responseBody.contains("error") || (json != null && json.get("message") != null),
                 "[TC04-N] Missing expected error message or body");
 
         // TC05-N - Error message should be a string
@@ -193,7 +182,6 @@ public class TC01_CreateNewWishlist extends TestBase {
         }
 
 
-
         // TC08-N - books list should not be returned
         if (json != null && json.get("") instanceof List) {
             List<?> books = json.getList("books");
@@ -201,7 +189,7 @@ public class TC01_CreateNewWishlist extends TestBase {
                     "[TC08-N] Unexpected books returned");
         }
 
-        // TC09-N and TC10-N skipped as ID and valid structure shouldn’t exist
+
     }
 
 

@@ -37,7 +37,7 @@ public class TC03_UpdateBook extends TestBase {
                 .auth().preemptive().basic("admin", "admin")
                 .header("Content-Type", "application/json")
                 .header("g-token", "ROM831ESV") // Only include if required by API
-                .body(getCreateBookBody(Title,Author,ISBN , ReleaseDate))
+                .body(getCreateBookBody(Title, Author, ISBN, ReleaseDate))
                 .when()
                 .put("/books/" + BookID)
                 .then()
@@ -47,98 +47,9 @@ public class TC03_UpdateBook extends TestBase {
 
         response.prettyPrint();
 
-        /*
 
-        // check response time
-        System.out.println(response.getTime());
-        Assert.assertTrue(response.getTime()<4000);
-
-        //  check title is exist
-        String title = response.jsonPath().get("title");
-        Assert.assertEquals(title,Title);
-
-        //check value not Null and not Empty
-        Assert.assertTrue(!title.isEmpty());
-        Assert.assertTrue(!title.equals(null));
-
-        // check datatype validation
-        Assert.assertEquals(response.jsonPath().get("title"),Title);
-
-
-        // TC03: Content-Type check
-        String contentType = response.getHeader("Content-Type");
-        Assert.assertTrue(contentType.contains("application/json"), "Content-Type is not application/json");
-
-        // TC04: Body is valid JSON object
-        Assert.assertTrue(response.jsonPath().get("") instanceof java.util.Map);
-
-        // Required fields
-        String[] requiredFields = {"title", "author", "isbn", "releaseDate", "createdAt", "updatedAt", "id"};
-        for (String field : requiredFields) {
-            Assert.assertNotNull(response.jsonPath().get(field), field + " is missing");
-        }
-
-        // TC06: Validate field types
-        Assert.assertTrue(response.jsonPath().get("title") instanceof String);
-        Assert.assertTrue(response.jsonPath().get("author") instanceof String);
-        Assert.assertTrue(response.jsonPath().get("isbn") instanceof String);
-        Assert.assertTrue(response.jsonPath().get("releaseDate") instanceof String);
-        Assert.assertTrue(response.jsonPath().get("createdAt") instanceof String);
-        Assert.assertTrue(response.jsonPath().get("updatedAt") instanceof String);
-        Assert.assertTrue(response.jsonPath().get("id") instanceof Integer);
-
-        // TC07: ID positive
-        Assert.assertTrue(response.jsonPath().getInt("id") > 0);
-
-        // TC08: ISO 8601 format
-        String iso8601 = "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$";
-        Pattern pattern = Pattern.compile(iso8601);
-
-        String createdAt = response.jsonPath().getString("createdAt");
-        String updatedAt = response.jsonPath().getString("updatedAt");
-        String releaseDate = response.jsonPath().getString("releaseDate");
-
-        Assert.assertTrue(pattern.matcher(createdAt).matches(), "createdAt not in ISO 8601");
-        Assert.assertTrue(pattern.matcher(updatedAt).matches(), "updatedAt not in ISO 8601");
-        Assert.assertTrue(pattern.matcher(releaseDate).matches(), "releaseDate not in ISO 8601");
-
-        // TC09 & TC14: updatedAt >= createdAt
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-            Date created = sdf.parse(createdAt);
-            Date updated = sdf.parse(updatedAt);
-            Assert.assertTrue(!updated.before(created), "updatedAt is before createdAt");
-        } catch (Exception e) {
-            Assert.fail("Date parsing failed: " + e.getMessage());
-        }
-
-        // TC10: title, author, isbn not empty
-        Assert.assertFalse(response.jsonPath().getString("title").isEmpty(), "title is empty");
-        Assert.assertFalse(response.jsonPath().getString("author").isEmpty(), "author is empty");
-        Assert.assertFalse(response.jsonPath().getString("isbn").isEmpty(), "isbn is empty");
-
-        // TC11: releaseDate not in future
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-            Date release = sdf.parse(releaseDate);
-            Assert.assertTrue(release.before(new Date()), "releaseDate is in the future");
-        } catch (Exception e) {
-            Assert.fail("Date parsing failed: " + e.getMessage());
-        }
-
-        // TC13: No unexpected fields
-        String[] actualFields = response.jsonPath().getMap("$").keySet().toArray(new String[0]);
-        Assert.assertEqualsNoOrder(actualFields, requiredFields, "Unexpected fields in response");
-
-         */
-
-        // TC15: JSON schema validation (assumes you placed book-schema.json under test/resources/schemas/)
-//        response.then().body(matchesJsonSchemaInClasspath("schemas/book-schema.json"));
-
-        // check response time
         System.out.println(response.getTime());
         Assert.assertTrue(response.getTime() < 4000);
-
 
 
         // Extract each field explicitly
@@ -154,22 +65,22 @@ public class TC03_UpdateBook extends TestBase {
         Assert.assertNotNull(title, "Title is missing");
         Assert.assertTrue(!title.isEmpty());
         Assert.assertTrue(!title.equals(null));
-        Assert.assertEquals(response.jsonPath().get("title"),Title);
+        Assert.assertEquals(response.jsonPath().get("title"), Title);
 
         Assert.assertNotNull(author, "Author is missing");
         Assert.assertTrue(!author.isEmpty());
         Assert.assertTrue(!author.equals(null));
-        Assert.assertEquals(response.jsonPath().get("author"),Author);
+        Assert.assertEquals(response.jsonPath().get("author"), Author);
 
         Assert.assertNotNull(isbn, "ISBN is missing");
         Assert.assertTrue(!isbn.isEmpty());
         Assert.assertTrue(!isbn.equals(null));
-        Assert.assertEquals(response.jsonPath().get("isbn"),ISBN);
+        Assert.assertEquals(response.jsonPath().get("isbn"), ISBN);
 
         Assert.assertNotNull(releaseDate, "Release Date is missing");
         Assert.assertTrue(!releaseDate.isEmpty());
         Assert.assertTrue(!releaseDate.equals(null));
-        Assert.assertEquals(response.jsonPath().get("releaseDate"),"2015-03-21T00:00:00.000Z");
+        Assert.assertEquals(response.jsonPath().get("releaseDate"), "2015-03-21T00:00:00.000Z");
 
         Assert.assertNotNull(createdAt, "Created At is missing");
         Assert.assertTrue(!createdAt.isEmpty());
@@ -308,16 +219,7 @@ public class TC03_UpdateBook extends TestBase {
                 400, "TC08: Expected 400 for malformed JSON"
         );
 
-      /*  // TC09: Missing Content-Type header
-        Assert.assertEquals(
-                given()
-                        .header("g-token", "ROM831ESV")
-                        .body(String.format(basePayload, generateRandomName(), generateRandomName(), generateRandomIsbn(), ReleaseDate))
-                        .when().post("/books")
-                        .getStatusCode(),
-                415, // API Bug
-                "TC09: Expected 415 Unsupported Media Type (missing Content-Type)"
-        );  */
+
     }
 
 

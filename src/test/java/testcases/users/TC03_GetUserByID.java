@@ -169,6 +169,6 @@ public class TC03_GetUserByID extends TestBase {
             Assert.assertNull(json.get("email"), "[TC08-N] Unexpected field 'email'");
         }
 
-        // TC09-N and TC10-N are skipped because ID-related validations only apply to valid records
+
     }
 }

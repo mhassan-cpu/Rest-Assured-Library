@@ -14,7 +14,7 @@ public class UpdateWishlistBody {
             wishlistBody.put("name", name);
             wishlistBody.put("books", bookIds);
 
-            // Convert map to JSON string
+
             ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(wishlistBody);
 

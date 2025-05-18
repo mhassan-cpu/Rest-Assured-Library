@@ -79,30 +79,7 @@ public class Utility {
                 return String.valueOf(1000 + random.nextInt(9000));
             }
 
-            // Example usage
-           /* public static void main(String[] args) {
-                String isbn = generateRandomIsbn();
-                System.out.println("Generated ISBN: " + isbn);
-            }
-        } */
 
-
-
-        //private static final String LETTERS = "abcdefghijklmnopqrstuvwxyz";
-        //private static final Random RANDOM = new Random();
-
-
-
-       /* private static String generateemailPart() {
-            StringBuilder part = new StringBuilder();
-            // First letter uppercase
-            part.append(Character.toUpperCase(LETTERS.charAt(RANDOM.nextInt(LETTERS.length()))));
-            // Next 3 letters lowercase
-            for (int i = 0; i < 3; i++) {
-                part.append(LETTERS.charAt(RANDOM.nextInt(LETTERS.length())));
-            }
-            return part.toString();
-        }*/
 
         public static String generateRandomEmail() {
             String LETTERS = "abcdefghijklmnopqrstuvwxyz";
